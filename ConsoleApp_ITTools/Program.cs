@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using ClassLibrary_ITTools;
@@ -31,7 +32,7 @@ bool userAcceptInput(string question)
 
 
 Console.Title = appName;
-Console.SetWindowSize(130, 37);
+Console.SetWindowSize(130, 35);
 
 string frameworkDesc = RuntimeInformation.FrameworkDescription.ToString();
 string osDescription = RuntimeInformation.OSDescription.ToString();
@@ -91,12 +92,12 @@ while (runConsoleApp)
             if (userAcceptInput("¿Desea que el comprobador de recursos intente reparar los archivos con problemas?"))
             {
                 Console.WriteLine("# SCANNOW");
-                class1.runProcessConsole("sfc.exe /SCANNOW", true);
+                class1.runProcessConsole("sfc.exe /SCANNOW", true, false);
             }
             else
             {
                 Console.WriteLine("# VERIFYONLY");
-                class1.runProcessConsole("sfc.exe /VERIFYONLY", true);
+                class1.runProcessConsole("sfc.exe /VERIFYONLY", true, false);
             }
 
             Console.WriteLine("Presione cualquier tecla para continuar...");
@@ -105,7 +106,7 @@ while (runConsoleApp)
             break;
         case "2":
             userInput = getLetterVolume();
-            class1.runProcessConsole("chkdsk.exe " + userInput + ": /f", true);
+            class1.runProcessConsole("chkdsk.exe " + userInput + ": /f", true, false);
 
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
@@ -113,7 +114,7 @@ while (runConsoleApp)
             break;
         case "3":
             userInput = getLetterVolume();
-            class1.runProcessConsole("chkdsk.exe " + userInput + ": /f /r /b", true);
+            class1.runProcessConsole("chkdsk.exe " + userInput + ": /f /r /b", true, false);
 
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
@@ -121,7 +122,7 @@ while (runConsoleApp)
             break;
         case "4":
             userInput = getLetterVolume();
-            class1.runProcessConsole("chkdsk.exe " + userInput + ": /f /r /b /x", true);
+            class1.runProcessConsole("chkdsk.exe " + userInput + ": /f /r /b /x", true, false);
 
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
@@ -129,24 +130,24 @@ while (runConsoleApp)
             break;
         case "5":
             Console.WriteLine("# CheckHealth. Paso 1/4.");
-            class1.runProcessConsole("DISM.exe /Online /Cleanup-Image /CheckHealth", true);
+            class1.runProcessConsole("DISM.exe /Online /Cleanup-Image /CheckHealth", true, false);
             Console.WriteLine("# ScanHealth. Paso 2/4.");
-            class1.runProcessConsole("DISM.exe /Online /Cleanup-Image /ScanHealth", true);
+            class1.runProcessConsole("DISM.exe /Online /Cleanup-Image /ScanHealth", true, false);
             Console.WriteLine("# RestoreHealth. Paso 3/4.");
             if (userAcceptInput("¿Ejecutar '/RestoreHealth' para realizar operaciones de reparación automáticamente? Esta operación puede tardar varios minutos."))
             {
-                class1.runProcessConsole("DISM.exe /Online /Cleanup-Image /RestoreHealth", true);
+                class1.runProcessConsole("DISM.exe /Online /Cleanup-Image /RestoreHealth", true, false);
             }
             Console.WriteLine("# startComponentCleanup. Paso 4/4.");
             if (userAcceptInput("¿Ejecutar '/startComponentCleanup' para limpiar los componentes reemplazados y reducir el tamaño del almacén de componentes?"))
             {
                 if (userAcceptInput("¿Ejecutar '/ResetBase' para restablecer la base de componentes reemplazados? ADVERTENCIA: Las actualizaciones de Windows instaladas no se pueden desinstalar si ejecuta '/startComponentCleanup' con '/ResetBase'."))
                 {
-                    class1.runProcessConsole("DISM.exe /Online /Cleanup-Image /startComponentCleanup /ResetBase", true);
+                    class1.runProcessConsole("DISM.exe /Online /Cleanup-Image /startComponentCleanup /ResetBase", true, false);
                 }
                 else
                 {
-                    class1.runProcessConsole("DISM.exe /Online /Cleanup-Image /startComponentCleanup", true);
+                    class1.runProcessConsole("DISM.exe /Online /Cleanup-Image /startComponentCleanup", true, false);
                 }
             }
 
@@ -156,62 +157,54 @@ while (runConsoleApp)
             break;
         case "6":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
-            Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("cleanmgr.exe", false);
+            class1.runProcessConsole("cleanmgr.exe", false, true);
 
             Console.Clear();
             break;
         case "7":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
-            Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("SystemPropertiesProtection.exe", false);
+            class1.runProcessConsole("SystemPropertiesProtection.exe", false, true);
 
             Console.Clear();
             break;
         case "8":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
-            Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("control.exe", false);
+            class1.runProcessConsole("control.exe", false, true);
 
             Console.Clear();
             break;
         case "9":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
-            Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("msinfo32.exe", false);
+            class1.runProcessConsole("msinfo32.exe", false, true);
 
             Console.Clear();
             break;
         case "10":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
-            Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("eventvwr.msc", false);
+            class1.runProcessConsole("eventvwr.msc", false, true);
 
             Console.Clear();
             break;
         case "11":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
-            Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("MdSched.exe", false);
+            class1.runProcessConsole("MdSched.exe", false, true);
 
             Console.Clear();
             break;
         case "12":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
-            Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("lusrmgr.msc", false);
+            class1.runProcessConsole("lusrmgr.msc", false, true);
 
             Console.Clear();
             break;
         case "13":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
-            Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("mmc.exe", false);
+            class1.runProcessConsole("mmc.exe", false, true);
 
             Console.Clear();
             break;
         case "14":
-            class1.runProcessConsole("WMIC.exe", true);
+            class1.runProcessConsole("WMIC.exe", true, false);
 
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
@@ -219,13 +212,12 @@ while (runConsoleApp)
             break;
         case "15":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
-            Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("diskmgmt.msc", false);
+            class1.runProcessConsole("diskmgmt.msc", false, true);
 
             Console.Clear();
             break;
         case "16":
-            class1.runProcessConsole("diskpart.exe", true);
+            class1.runProcessConsole("diskpart.exe", true, false);
 
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
@@ -233,13 +225,13 @@ while (runConsoleApp)
             break;
         case "17":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
-            Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("dxdiag.exe", false);
+            class1.runProcessConsole("dxdiag.exe", false, true);
 
             Console.Clear();
             break;
         case "18":
-            class1.runProcessConsole("hdwwiz.exe", true);
+            Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
+            class1.runProcessConsole("hdwwiz.exe", true, true);
 
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
@@ -248,31 +240,32 @@ while (runConsoleApp)
         case "19":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
             Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("fsmgmt.msc", false);
+            class1.runProcessConsole("fsmgmt.msc", false, true);
 
             Console.Clear();
             break;
         case "20":
-            class1.runProcessConsole("mrt.exe", true);
+            Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
+            class1.runProcessConsole("mrt.exe", true, true);
 
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
             Console.Clear();
             break;
         case "21":
-            class1.runProcessConsole("gpedit.msc", false);
+            Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
+            class1.runProcessConsole("gpedit.msc", false, true);
 
             Console.Clear();
             break;
         case "22":
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
-            Console.WriteLine("No cierre esta ventana.");
-            class1.runProcessConsole("WSReset.exe", false);
+            class1.runProcessConsole("WSReset.exe", false, false);
 
             Console.Clear();
             break;
         case "23":
-            class1.runProcessConsole("ipconfig /all", false);
+            class1.runProcessConsole("ipconfig /all", false, false);
 
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
@@ -282,34 +275,17 @@ while (runConsoleApp)
             if (userAcceptInput("El equipo se reiniciará dentro de 5 segundos, cualquier trabajo no guardado se perderá. ¿Continuar?"))
             {
                 Console.WriteLine("El equipo se reiniciará dentro de 5 segundos...");
-                class1.runProcessConsole("shutdown /r /f /t 005", false);
+                class1.runProcessConsole("shutdown /r /f /t 005", false, true);
                 runConsoleApp = false;
                 break;
             }
 
             Console.Clear();
             break;
-        case "100":
-            class1.runProcessConsole("echo ¡Hola, mundo!", false);
-
-            Console.WriteLine("Presione cualquier tecla para continuar...");
-            Console.ReadKey();
-            Console.Clear();
-            break;
-        case "101":
-            class1.runProcessConsole("echo ¡Hola, mundo!", true);
-
-            Console.WriteLine("Presione cualquier tecla para continuar...");
-            Console.ReadKey();
-            Console.Clear();
-            break;
         default:
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Opción inválida. Ingrese una opción válida.");
             Console.ResetColor();
-            Console.WriteLine("Ayuda para utilizar este programa.\n");
-            Console.WriteLine("1) Opción A\n2) Opción B\n3) Opción C\n\nElija una opción: 3\n* Opción C seleccionado.\n");
-            Console.WriteLine("¿Aceptar? (S/N): S\n* Aceptado.\n");
 
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();

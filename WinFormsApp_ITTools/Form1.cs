@@ -43,9 +43,9 @@ namespace WinFormsApp_ITTools
             return false;
         }
 
-        private void runProcess(string cmdLine, bool runAsAdmin)
+        private void runProcess(string cmdLine, bool runAsAdmin, bool showConsole)
         {
-            var (success, result) = class1.runProcessWindows(cmdLine, runAsAdmin);
+            var (success, result) = class1.runProcessWindows(cmdLine, runAsAdmin, showConsole);
             if (success)
             {
                 MessageBox.Show(result, "Proceso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -81,11 +81,11 @@ namespace WinFormsApp_ITTools
                     case "2":
                         if (userAcceptInput("¿Desea que el comprobador de recursos intente reparar los archivos con problemas?"))
                         {
-                            runProcess("sfc.exe /SCANNOW", true);
+                            runProcess("sfc.exe /SCANNOW", true, true);
                         }
                         else
                         {
-                            runProcess("sfc.exe /VERIFYONLY", true);
+                            runProcess("sfc.exe /VERIFYONLY", true, true);
                         }
                         break;
                     case "3":
@@ -98,105 +98,98 @@ namespace WinFormsApp_ITTools
                             }
                         }
 
-                        runProcess("chkdsk.exe " + class1.convertInputToLetterVolume(textBox1.Text) + ": /f", true);
+                        runProcess("chkdsk.exe " + class1.convertInputToLetterVolume(textBox1.Text) + ": /f", true, true);
                         break;
                     case "4":
-                        runProcess("chkdsk.exe " + class1.convertInputToLetterVolume(textBox1.Text) + ": /f /r /b", true);
+                        runProcess("chkdsk.exe " + class1.convertInputToLetterVolume(textBox1.Text) + ": /f /r /b", true, true);
                         break;
                     case "5":
-                        runProcess("chkdsk.exe " + class1.convertInputToLetterVolume(textBox1.Text) + ": /f /r /b /x", true);
+                        runProcess("chkdsk.exe " + class1.convertInputToLetterVolume(textBox1.Text) + ": /f /r /b /x", true, true);
                         break;
                     case "6":
                         MessageBox.Show("CheckHealth. Paso 1/4.", "Ejecutar DISM", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        runProcess("DISM.exe /Online /Cleanup-Image /CheckHealth", true);
+                        runProcess("DISM.exe /Online /Cleanup-Image /CheckHealth", true, true);
                         MessageBox.Show("ScanHealth. Paso 2/4.", "Ejecutar DISM", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        runProcess("DISM.exe /Online /Cleanup-Image /ScanHealth", true);
+                        runProcess("DISM.exe /Online /Cleanup-Image /ScanHealth", true, true);
                         MessageBox.Show("RestoreHealth. Paso 3/4.", "Ejecutar DISM", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (userAcceptInput("¿Ejecutar '/RestoreHealth' para realizar operaciones de reparación automáticamente? Esta operación puede tardar varios minutos."))
                         {
-                            runProcess("DISM.exe /Online /Cleanup-Image /RestoreHealth", true);
+                            runProcess("DISM.exe /Online /Cleanup-Image /RestoreHealth", true, true);
                         }
                         MessageBox.Show("startComponentCleanup. Paso 4/4.", "Ejecutar DISM", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (userAcceptInput("¿Ejecutar '/startComponentCleanup' para limpiar los componentes reemplazados y reducir el tamaño del almacén de componentes?"))
                         {
                             if (userAcceptInput("¿Ejecutar '/ResetBase' para restablecer la base de componentes reemplazados? ADVERTENCIA: Las actualizaciones de Windows instaladas no se pueden desinstalar si ejecuta '/startComponentCleanup' con '/ResetBase'."))
                             {
-                                runProcess("DISM.exe /Online /Cleanup-Image /startComponentCleanup /ResetBase", true);
+                                runProcess("DISM.exe /Online /Cleanup-Image /startComponentCleanup /ResetBase", true, true);
                             }
                             else
                             {
-                                runProcess("DISM.exe /Online /Cleanup-Image /startComponentCleanup", true);
+                                runProcess("DISM.exe /Online /Cleanup-Image /startComponentCleanup", true, true);
                             }
                         }
                         break;
                     case "7":
-                        runProcess("cleanmgr.exe", false);
+                        runProcess("cleanmgr.exe", false, false);
                         break;
                     case "8":
-                        runProcess("SystemPropertiesProtection.exe", false);
+                        runProcess("SystemPropertiesProtection.exe", false, false);
                         break;
                     case "9":
-                        runProcess("control.exe", false);
+                        runProcess("control.exe", false, false);
                         break;
                     case "10":
-                        runProcess("msinfo32.exe", false);
+                        runProcess("msinfo32.exe", false, false);
                         break;
                     case "11":
-                        runProcess("eventvwr.msc", false);
+                        runProcess("eventvwr.msc", false, false);
                         break;
                     case "12":
-                        runProcess("MdSched.exe", false);
+                        runProcess("MdSched.exe", false, false);
                         break;
                     case "13":
-                        runProcess("lusrmgr.msc", false);
+                        runProcess("lusrmgr.msc", false, false);
                         break;
                     case "14":
-                        runProcess("mmc.exe", false);
+                        runProcess("mmc.exe", false, false);
                         break;
                     case "15":
-                        runProcess("WMIC.exe", true);
+                        runProcess("WMIC.exe", true, true);
                         break;
                     case "16":
-                        runProcess("diskmgmt.msc", false);
+                        runProcess("diskmgmt.msc", false, false);
                         break;
                     case "17":
-                        runProcess("diskpart.exe", true);
+                        runProcess("diskpart.exe", true, true);
                         break;
                     case "18":
-                        runProcess("dxdiag.exe", false);
+                        runProcess("dxdiag.exe", false, false);
                         break;
                     case "19":
-                        runProcess("hdwwiz.exe", true);
+                        runProcess("hdwwiz.exe", true, false);
                         break;
                     case "20":
-                        runProcess("fsmgmt.msc", false);
+                        runProcess("fsmgmt.msc", false, false);
                         break;
                     case "21":
-                        runProcess("mrt.exe", true);
+                        runProcess("mrt.exe", true, false);
                         break;
                     case "22":
-                        runProcess("gpedit.msc", false);
+                        runProcess("gpedit.msc", false, false);
                         break;
                     case "23":
-                        runProcess("WSReset.exe", false);
+                        runProcess("WSReset.exe", false, true);
                         break;
                     case "24":
-                        runProcess("ipconfig /all", false);
+                        runProcess("ipconfig /all", false, true);
                         break;
                     case "25":
                         if (userAcceptInput("El equipo se reiniciará dentro de 5 segundos, cualquier trabajo no guardado se perderá. ¿Continuar?"))
                         {
-                            Console.WriteLine("El equipo se reiniciará dentro de 5 segundos...");
-                            runProcess("shutdown /r /f /t 005", false);
+                            runProcess("shutdown /r /f /t 005", false, false);
                             Close();
                             return;
                         }
-                        break;
-                    case "26":
-                        runProcess("echo ¡Hola, mundo!", false);
-                        break;
-                    case "27":
-                        runProcess("echo ¡Hola, mundo!", true);
                         break;
                     default:
                         MessageBox.Show("Opción no implementada.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);

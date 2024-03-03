@@ -36,9 +36,7 @@ namespace ClassLibrary_ITTools
             "21) Editor de directivas de grupo local.",
             "22) Windows Store Reset.",
             "23) ipConfig /All",
-            "24) Salir del programa y reiniciar el equipo (Se perderá cualquier trabajo no guardado).",
-            ".",
-            "."};
+            "24) Salir del programa y reiniciar el equipo (Se perderá cualquier trabajo no guardado)."};
 
             return tabla;
         }
@@ -62,6 +60,7 @@ namespace ClassLibrary_ITTools
             proceso.StartInfo.FileName = "cmd.exe";
             proceso.StartInfo.Arguments = "/c" + cmdLine;
             proceso.StartInfo.UseShellExecute = false;
+            proceso.StartInfo.CreateNoWindow = false;
             if (runAsAdmin)
             {
                 proceso.StartInfo.WorkingDirectory = Environment.GetEnvironmentVariable("SystemRoot") + @"\System32";
@@ -73,21 +72,24 @@ namespace ClassLibrary_ITTools
             }
             return proceso;
         }
-        
+
         /// <summary>
         /// Ejecuta un nuevo proceso utilizando la aplicación cmd.exe. Recomendado para la aplicación de Consola.
         /// </summary>
         /// <param name="cmdLine">La línea de comandos que se pasará al proceso cmd.exe.</param>
         /// <param name="runAsAdmin">Especifica si el proceso debe ejecutarse con privilegios de administrador.</param>
-        public void runProcessConsole(string cmdLine, bool runAsAdmin)
+        public void runProcessConsole(string cmdLine, bool runAsAdmin, bool hideNewConsole)
         {
             Process proceso = newProcess(cmdLine, runAsAdmin);
             if (runAsAdmin && !isRunningAsAdmin())
             {
-                Console.WriteLine("Se requiere permisos elevados para ejecutar este comando. Se abrirá una nueva ventana una vez que un usuario administrador permita la ejecución del comando.");
-                Console.WriteLine("No cierre esta ventana.");
-                proceso.StartInfo.UseShellExecute = true;
-                proceso.StartInfo.Arguments += "& pause";
+                Console.WriteLine("Se requiere permisos elevados para ejecutar este comando.");
+                if (!hideNewConsole)
+                {
+                    Console.WriteLine("Se abrirá una nueva ventana una vez que un usuario administrador permita la ejecución del comando. No cierre esta ventana.");
+                    proceso.StartInfo.UseShellExecute = true;
+                    proceso.StartInfo.Arguments += "& pause";
+                }
             }
             try
             {
@@ -112,11 +114,16 @@ namespace ClassLibrary_ITTools
         /// <param name="cmdLine">La línea de comandos que se pasará al proceso cmd.exe.</param>
         /// <param name="runAsAdmin">Especifica si el proceso debe ejecutarse con privilegios de administrador.</param>
         /// <returns>Una cadena que representa la salida del proceso ejecutado.</returns>
-        public (bool, string) runProcessWindows(string cmdLine, bool runAsAdmin)
+        public (bool, string) runProcessWindows(string cmdLine, bool runAsAdmin, bool showConsole)
         {
             Process proceso = newProcess(cmdLine, runAsAdmin);
-            proceso.StartInfo.UseShellExecute = true;
-            proceso.StartInfo.Arguments += "& pause";
+            proceso.StartInfo.CreateNoWindow = true;
+            if (showConsole)
+            {
+                proceso.StartInfo.UseShellExecute = true;
+                proceso.StartInfo.CreateNoWindow = false;
+                proceso.StartInfo.Arguments += "& pause";
+            }
             try
             {
                 proceso.Start();
