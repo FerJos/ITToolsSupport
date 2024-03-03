@@ -6,10 +6,13 @@ Este repositorio incluye tres proyectos. Se incluye la aplicación de Windows Fo
 ![image](https://github.com/FerJos/ITToolsSupport/assets/38123159/3d848dcf-bed3-4864-a2b9-11637e73409d)
 ![image](https://github.com/FerJos/ITToolsSupport/assets/38123159/3780d0a3-5320-4aff-9d13-1c4cf37e2c1a)
 
+### Compilaciones
+Puedes encontrar las aplicaciones compiladas en [Aplicaciones compiladas](https://github.com/FerJos/ITToolsSupport/tree/6de957bbc439f26fb64c807161a4644631f2a653/Aplicaciones%20compiladas)
+
+### Alguno de los comandos que ejecuta está aplicación
 >[!NOTE]
 > Si intenta ejecutar alguna de las herramientas que requieren permisos administrativos se le solicitará el permiso por medio del UAC. El UAC le solicitará la confirmación por cada comando que lo requiera, incluso si no ha cerrado la aplicación, a menos que ejecute la aplicación como administrador.
 
-### Alguno de los comandos que ejecuta está aplicación
 * [sfc](https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/sfc)
 * [chkdsk](https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/chkdsk?tabs=event-viewer)
 * [DISM](https://learn.microsoft.com/es-mx/windows-hardware/manufacture/desktop/what-is-dism?view=windows-11)
