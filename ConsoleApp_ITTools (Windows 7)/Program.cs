@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Security.Principal;
-
 
 namespace ConsoleApplication1
 {
@@ -36,7 +31,7 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-            string appName = "Console App IT Tools";
+            string appName = "Console App IT Tools (Windows 7)";
             Console.Title = appName;
             Console.SetWindowSize(130, 35);
 
@@ -124,6 +119,7 @@ namespace ConsoleApplication1
                         Console.Clear();
                         break;
                     case "5":
+                        // Opción 5 eliminada.
                         Console.Clear();
                         break;
                     case "6":
@@ -230,6 +226,7 @@ namespace ConsoleApplication1
                         Console.Clear();
                         break;
                     case "22":
+                        // Opción 22 eliminada.
                         Console.Clear();
                         break;
                     case "23":
