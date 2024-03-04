@@ -1,10 +1,12 @@
 # IT Tools Support
 
 Este repositorio incluye tres proyectos. Se incluye la aplicación de Windows Forms y la aplicación de Consola, ambas aplicaciones cumplen con el mismo propósito. Estas aplicaciones permiten la ejecución de las herramientas integradas en el sistema operativo Microsoft Windows con el objetivo de facilitar el mantenimiento y/o reparación del sistema.
-> [.NET 8.0 SDK](https://dotnet.microsoft.com/es-es/download/dotnet/thank-you/sdk-8.0.201-windows-x64-installer)
+> [.NET 8.0 SDK](https://dotnet.microsoft.com/es-es/download/dotnet/thank-you/sdk-8.0.201-windows-x64-installer) - [ConsoleApp_ITTools](https://github.com/FerJos/ITToolsSupport/tree/d8cc77a33b1757a200e3ec6186a5ada392469fe4/ConsoleApp_ITTools), [WinFormsApp_ITTools](https://github.com/FerJos/ITToolsSupport/tree/d8cc77a33b1757a200e3ec6186a5ada392469fe4/WinFormsApp_ITTools)-
+>
+> `.NET Framework 3.5` - [ConsoleApp_ITTools (Windows 7)](https://github.com/FerJos/ITToolsSupport/tree/d8cc77a33b1757a200e3ec6186a5ada392469fe4/ConsoleApp_ITTools%20(Windows%207)).
 
-![image](https://github.com/FerJos/ITToolsSupport/assets/38123159/3d848dcf-bed3-4864-a2b9-11637e73409d)
-![image](https://github.com/FerJos/ITToolsSupport/assets/38123159/3780d0a3-5320-4aff-9d13-1c4cf37e2c1a)
+![Captura de pantalla de la aplicación ConsoleApp_ITTools.](https://github.com/FerJos/ITToolsSupport/assets/38123159/3d848dcf-bed3-4864-a2b9-11637e73409d)
+![Captura de pantalla de la aplicación WinFormsApp_ITTools.](https://github.com/FerJos/ITToolsSupport/assets/38123159/3780d0a3-5320-4aff-9d13-1c4cf37e2c1a)
 
 ### Compilaciones
 Puedes encontrar las aplicaciones compiladas en [Aplicaciones compiladas](https://github.com/FerJos/ITToolsSupport/tree/6de957bbc439f26fb64c807161a4644631f2a653/Aplicaciones%20compiladas)
