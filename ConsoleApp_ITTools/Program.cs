@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Security.Principal;
+﻿using System.Runtime.InteropServices;
 using ClassLibrary_ITTools;
 
 string appName = "Console App IT Tools";

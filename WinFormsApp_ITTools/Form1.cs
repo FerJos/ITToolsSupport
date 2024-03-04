@@ -1,4 +1,5 @@
 using ClassLibrary_ITTools;
+using System.Runtime.InteropServices;
 
 namespace WinFormsApp_ITTools
 {
@@ -73,7 +74,14 @@ namespace WinFormsApp_ITTools
                 switch (userInput)
                 {
                     case "0":
-                        MessageBox.Show("Esta aplicación de consola ejecuta las herramientas integradas del sistema operativo ©Microsoft Windows para realizar mantenimiento y/o reparación al equipo.\nA continuación se muestra la documentación de algunos de los comandos utilizados.\n\n* sfc - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/sfc\n* chkdsk - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/chkdsk?tabs=event-viewer\n* DISM - https://learn.microsoft.com/es-mx/windows-hardware/manufacture/desktop/what-is-dism?view=windows-11\n* cleanmgr - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/cleanmgr\n* ipconfig - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/ipconfig\n* shutdown - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/shutdown", "Documentación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(RuntimeInformation.FrameworkDescription.ToString() + " | " + RuntimeInformation.OSDescription.ToString() + " | " + RuntimeInformation.RuntimeIdentifier.ToString() + " | " + RuntimeInformation.ProcessArchitecture.ToString(), "Documentación", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        MessageBox.Show("Esta aplicación ejecuta las herramientas integradas del sistema operativo ©Microsoft Windows para realizar mantenimiento y/o reparación al equipo.\nA continuación se muestra la documentación de algunos de los comandos utilizados.\n\n" +
+                            "* sfc - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/sfc\n" +
+                            "* chkdsk - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/chkdsk?tabs=event-viewer\n" +
+                            "* DISM - https://learn.microsoft.com/es-mx/windows-hardware/manufacture/desktop/what-is-dism?view=windows-11\n" +
+                            "* cleanmgr - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/cleanmgr\n" +
+                            "* ipconfig - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/ipconfig\n" +
+                            "* shutdown - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/shutdown", "Documentación", MessageBoxButtons.OK, MessageBoxIcon.None);
                         break;
                     case "1":
                         Close();
