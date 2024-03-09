@@ -11,32 +11,34 @@ namespace ClassLibrary_ITTools
         /// <returns>Array</returns>
         public string[] getOptionsList()
         {
-            string[] tabla = {"!) Documentación de los comandos de Windows.",
-            "0) Salir del programa.",
-            "1)* sfc - Comprobador de recursos.",
-            "2)* CHKDSK - Corregir errores del disco.",
-            "3)* CHKDSK - Corregir errores del disco, encontrar sectores defectuosos y recupera la información legible.",
-            "4)* CHKDSK - Desmontar la unidad, corregir errores del disco, encontrar sectores defectuosos y recupera la información legible.",
-            "5)* DISM - {/CheckHealth | /ScanHealth | /RestoreHealth}.",
-            "6) Cleanmgr - Libera espacio en el disco.",
-            "7) Abrir Protección del sistema.",
-            "8) Abrir Panel de control.",
-            "9) Abrir Información del sistema.",
-            "10) Abrir Visor de eventos.",
-            "11) Abrir Diagnóstico de memoria de Windows.",
-            "12) Abrir Usuarios y grupos locales.",
-            "13) Microsoft Management Console.",
-            "14)* [EN DESUSO] Windows Management Instrumentation Console",
-            "15) Administración de discos.",
-            "16)* DISKPART.",
-            "17) Herramienta de diagnóstico de DirectX.",
-            "18)* Asistente para agregar hardware.",
-            "19) Carpetas compartidas.",
-            "20)* Herramienta de eliminación de software malintencionado de ©Microsoft Windows.",
-            "21) Editor de directivas de grupo local.",
-            "22) Windows Store Reset.",
-            "23) ipConfig /All",
-            "24) Salir del programa y reiniciar el equipo (Se perderá cualquier trabajo no guardado)."};
+            string[] tabla = {
+                "!)     Documentación de los comandos de Windows.",
+                "0)     Salir del programa.",
+                "1)*    sfc - Comprobador de recursos.",
+                "2)*    CHKDSK - Corregir errores del disco.",
+                "3)*    CHKDSK - Corregir errores del disco, encontrar sectores defectuosos y recupera la información legible.",
+                "4)*    CHKDSK - Desmontar la unidad, corregir errores del disco, encontrar sectores defectuosos y recupera la información legible.",
+                "5)*    DISM - {/CheckHealth | /ScanHealth | /RestoreHealth}.",
+                "6)     Cleanmgr - Libera espacio en el disco.",
+                "7)     Abrir Protección del sistema.",
+                "8)     Abrir Panel de control.",
+                "9)     Abrir Información del sistema.",
+                "10)    Abrir Visor de eventos.",
+                "11)    Abrir Diagnóstico de memoria de Windows.",
+                "12)**  Abrir Usuarios y grupos locales.",
+                "13)    Microsoft Management Console.",
+                "14)*   [EN DESUSO] Windows Management Instrumentation Console",
+                "15)    Administración de discos.",
+                "16)*   DISKPART.",
+                "17)    Herramienta de diagnóstico de DirectX.",
+                "18)*   Asistente para agregar hardware.",
+                "19)    Carpetas compartidas.",
+                "20)*   Herramienta de eliminación de software malintencionado de ©Microsoft Windows.",
+                "21)**  Editor de directivas de grupo local.",
+                "22)    Windows Store Reset.",
+                "23)    ipConfig /All",
+                "24)    Salir del programa y reiniciar el equipo (Se perderá cualquier trabajo no guardado)."
+            };
 
             return tabla;
         }
@@ -95,8 +97,15 @@ namespace ClassLibrary_ITTools
             {
                 proceso.Start();
                 proceso.WaitForExit();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n\n__________\nEl proceso a finalizado con el siguiente código: " + proceso.ExitCode);
+                if (proceso.ExitCode == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
+                Console.WriteLine("\n\n__________\nEl proceso a finalizado con el siguiente código: " + proceso.ExitCode + "\nExit time: " + proceso.ExitTime.ToString());
                 Console.ResetColor();
             }
             catch (Exception errExc)
@@ -106,6 +115,9 @@ namespace ClassLibrary_ITTools
                 Console.ResetColor();
                 Console.Beep();
             }
+
+            Console.WriteLine("\nPresione cualquier tecla para continuar...");
+            Console.ReadKey();
         }
 
         /// <summary>
@@ -113,8 +125,8 @@ namespace ClassLibrary_ITTools
         /// </summary>
         /// <param name="cmdLine">La línea de comandos que se pasará al proceso cmd.exe.</param>
         /// <param name="runAsAdmin">Especifica si el proceso debe ejecutarse con privilegios de administrador.</param>
-        /// <returns>Una cadena que representa la salida del proceso ejecutado.</returns>
-        public (bool, string) runProcessWindows(string cmdLine, bool runAsAdmin, bool showConsole)
+        /// <returns>Número entero, 0 = Correcto, 1 = Posibles problemas, 2 = Error. Una cadena que representa la salida del proceso ejecutado.</returns>
+        public (int, string) runProcessWindows(string cmdLine, bool runAsAdmin, bool showConsole)
         {
             Process proceso = newProcess(cmdLine, runAsAdmin);
             proceso.StartInfo.CreateNoWindow = true;
@@ -128,11 +140,15 @@ namespace ClassLibrary_ITTools
             {
                 proceso.Start();
                 proceso.WaitForExit();
-                return (true, "El proceso a finalizado con el siguiente código: " + proceso.ExitCode.ToString());
+                if (proceso.ExitCode != 0)
+                {
+                    return (1, "El proceso a finalizado con el siguiente código: " + proceso.ExitCode.ToString() + "\nExit time: " + proceso.ExitTime.ToString());
+                }
+                return (0, "El proceso a finalizado con el siguiente código: " + proceso.ExitCode.ToString() + "\nExit time: " + proceso.ExitTime.ToString());
             }
             catch (Exception errExc)
             {
-                return (false, "El proceso no se pudo iniciar con el siguiente error: " + errExc.Message);
+                return (2, "El proceso no se pudo iniciar con el siguiente error: " + errExc.Message);
             }
         }
 

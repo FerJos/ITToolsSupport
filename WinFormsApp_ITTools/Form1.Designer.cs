@@ -34,6 +34,7 @@
             button2 = new Button();
             label2 = new Label();
             textBox1 = new TextBox();
+            label3 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -48,7 +49,9 @@
             // comboBox1
             // 
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.DropDownWidth = 700;
             comboBox1.FormattingEnabled = true;
+            comboBox1.ImeMode = ImeMode.NoControl;
             comboBox1.Location = new Point(12, 35);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(310, 23);
@@ -58,7 +61,7 @@
             // button1
             // 
             button1.Enabled = false;
-            button1.Location = new Point(85, 130);
+            button1.Location = new Point(85, 172);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 2;
@@ -68,7 +71,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(170, 130);
+            button2.Location = new Point(170, 172);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 3;
@@ -93,11 +96,21 @@
             textBox1.Size = new Size(79, 23);
             textBox1.TabIndex = 5;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(12, 122);
+            label3.Name = "label3";
+            label3.Size = new Size(311, 45);
+            label3.TabIndex = 6;
+            label3.Text = "(*) Herramienta que requiere permisos administrativos.\r\n(**) No disponible o con funciones limitadas en la edición\r\nHome.";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(334, 161);
+            ClientSize = new Size(334, 201);
+            Controls.Add(label3);
             Controls.Add(textBox1);
             Controls.Add(label2);
             Controls.Add(button2);
@@ -120,5 +133,6 @@
         private Button button2;
         private Label label2;
         private TextBox textBox1;
+        private Label label3;
     }
 }

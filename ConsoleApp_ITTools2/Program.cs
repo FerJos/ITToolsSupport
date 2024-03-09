@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace ConsoleApp_ITTools2
 {
@@ -31,9 +32,19 @@ namespace ConsoleApp_ITTools2
 
         static void Main(string[] args)
         {
-            string appName = "Console App IT Tools";
+            string appName = "Console App IT Tools 2";
             Console.Title = appName;
-            Console.SetWindowSize(130, 35);
+            try
+            {
+                Console.SetWindowSize(132, 35);
+            }
+            catch (Exception errExc)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("ERROR: No se pudo ajustar el tamaño de la ventana de la consola. " + errExc.Message);
+                Console.ResetColor();
+                Thread.Sleep(2000);
+            }
 
             string[] itemsList = class1.getOptionsList();
             bool runConsoleApp = true;
@@ -55,7 +66,7 @@ namespace ConsoleApp_ITTools2
                     Console.WriteLine(itemsList[i]);
                 }
 
-                Console.WriteLine("(*) Herramienta que requiere permisos administrativos.");
+                Console.WriteLine("\n(*) Herramienta que requiere permisos administrativos.\n(**) No disponible o con funciones limitadas en la edición Home.");
                 Console.Write("Elija una opción: ");
 
                 string userInput = Console.ReadLine() ?? "0";

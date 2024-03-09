@@ -1,5 +1,5 @@
-﻿using System.Runtime.InteropServices;
-using ClassLibrary_ITTools;
+﻿using ClassLibrary_ITTools;
+using System.Runtime.InteropServices;
 
 string appName = "Console App IT Tools";
 Class1 class1 = new Class1();
@@ -29,7 +29,17 @@ bool userAcceptInput(string question)
 
 
 Console.Title = appName;
-Console.SetWindowSize(130, 35);
+try
+{
+    Console.SetWindowSize(132, 35);
+}
+catch (Exception errExc)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("ERROR: No se pudo ajustar el tamaño de la ventana de la consola. " + errExc.Message);
+    Console.ResetColor();
+    Thread.Sleep(2000);
+}
 
 string frameworkDesc = RuntimeInformation.FrameworkDescription.ToString();
 string osDescription = RuntimeInformation.OSDescription.ToString();
@@ -56,7 +66,7 @@ while (runConsoleApp)
         Console.WriteLine(itemsList[i]);
     }
 
-    Console.WriteLine("(*) Herramienta que requiere permisos administrativos.");
+    Console.WriteLine("\n(*) Herramienta que requiere permisos administrativos.\n(**) No disponible o con funciones limitadas en la edición Home.");
     Console.Write("Elija una opción: ");
 
     string userInput = Console.ReadLine() ?? "0";
@@ -69,15 +79,16 @@ while (runConsoleApp)
     switch (userInput)
     {
         case "!":
-            Console.WriteLine("Esta aplicación de consola ejecuta las herramientas integradas del sistema operativo ©Microsoft Windows para realizar mantenimiento y/o reparación al equipo.\nA continuación se muestra la documentación de algunos de los comandos utilizados.\n");
-            Console.WriteLine("* sfc - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/sfc");
-            Console.WriteLine("* chkdsk - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/chkdsk?tabs=event-viewer");
-            Console.WriteLine("* DISM - https://learn.microsoft.com/es-mx/windows-hardware/manufacture/desktop/what-is-dism?view=windows-11");
-            Console.WriteLine("* cleanmgr - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/cleanmgr");
-            Console.WriteLine("* ipconfig - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/ipconfig");
-            Console.WriteLine("* shutdown - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/shutdown");
+            Console.WriteLine("Esta aplicación de consola ejecuta las herramientas integradas del sistema operativo ©Microsoft Windows para realizar mantenimiento y/o reparación al equipo.\n" +
+                "A continuación se muestra la documentación de algunos de los comandos utilizados.\n\n" +
+                "* sfc - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/sfc\n" +
+                "* chkdsk - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/chkdsk?tabs=event-viewer\n" +
+                "* DISM - https://learn.microsoft.com/es-mx/windows-hardware/manufacture/desktop/what-is-dism?view=windows-11\n" +
+                "* cleanmgr - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/cleanmgr\n" +
+                "* ipconfig - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/ipconfig\n" +
+                "* shutdown - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/shutdown\n");
 
-            Console.WriteLine("Presione cualquier tecla para continuar...");
+            Console.WriteLine("\nPresione cualquier tecla para continuar...");
             Console.ReadKey();
             Console.Clear();
             break;
@@ -97,32 +108,24 @@ while (runConsoleApp)
                 class1.runProcessConsole("sfc.exe /VERIFYONLY", true, false);
             }
 
-            Console.WriteLine("Presione cualquier tecla para continuar...");
-            Console.ReadKey();
             Console.Clear();
             break;
         case "2":
             userInput = getLetterVolume();
             class1.runProcessConsole("chkdsk.exe " + userInput + ": /f", true, false);
 
-            Console.WriteLine("Presione cualquier tecla para continuar...");
-            Console.ReadKey();
             Console.Clear();
             break;
         case "3":
             userInput = getLetterVolume();
             class1.runProcessConsole("chkdsk.exe " + userInput + ": /f /r /b", true, false);
 
-            Console.WriteLine("Presione cualquier tecla para continuar...");
-            Console.ReadKey();
             Console.Clear();
             break;
         case "4":
             userInput = getLetterVolume();
             class1.runProcessConsole("chkdsk.exe " + userInput + ": /f /r /b /x", true, false);
 
-            Console.WriteLine("Presione cualquier tecla para continuar...");
-            Console.ReadKey();
             Console.Clear();
             break;
         case "5":
@@ -148,8 +151,6 @@ while (runConsoleApp)
                 }
             }
 
-            Console.WriteLine("Presione cualquier tecla para continuar...");
-            Console.ReadKey();
             Console.Clear();
             break;
         case "6":
@@ -203,8 +204,6 @@ while (runConsoleApp)
         case "14":
             class1.runProcessConsole("WMIC.exe", true, false);
 
-            Console.WriteLine("Presione cualquier tecla para continuar...");
-            Console.ReadKey();
             Console.Clear();
             break;
         case "15":
@@ -216,8 +215,6 @@ while (runConsoleApp)
         case "16":
             class1.runProcessConsole("diskpart.exe", true, false);
 
-            Console.WriteLine("Presione cualquier tecla para continuar...");
-            Console.ReadKey();
             Console.Clear();
             break;
         case "17":
@@ -230,8 +227,6 @@ while (runConsoleApp)
             Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
             class1.runProcessConsole("hdwwiz.exe", true, true);
 
-            Console.WriteLine("Presione cualquier tecla para continuar...");
-            Console.ReadKey();
             Console.Clear();
             break;
         case "19":
@@ -264,8 +259,6 @@ while (runConsoleApp)
         case "23":
             class1.runProcessConsole("ipconfig /all", false, false);
 
-            Console.WriteLine("Presione cualquier tecla para continuar...");
-            Console.ReadKey();
             Console.Clear();
             break;
         case "24":

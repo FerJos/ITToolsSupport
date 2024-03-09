@@ -46,13 +46,19 @@ namespace WinFormsApp_ITTools
 
         private void runProcess(string cmdLine, bool runAsAdmin, bool showConsole)
         {
-            var (success, result) = class1.runProcessWindows(cmdLine, runAsAdmin, showConsole);
-            if (success)
+            var (runResult, result) = class1.runProcessWindows(cmdLine, runAsAdmin, showConsole);
+            switch (runResult)
             {
-                MessageBox.Show(result, "Proceso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                case 1: //Warning
+                    MessageBox.Show(result, "Proceso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    break;
+                case 2: //Error
+                    MessageBox.Show(result, "Proceso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:    // Success
+                    MessageBox.Show(result, "Proceso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
             }
-            MessageBox.Show(result, "Proceso", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void button2_Click(object sender, EventArgs e)
