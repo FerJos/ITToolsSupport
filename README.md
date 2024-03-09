@@ -5,7 +5,7 @@ Este repositorio incluye tres proyectos construidos en Visual Studio 2022. Se in
 >
 > [.NET Framework 4.8.1](https://learn.microsoft.com/es-mx/dotnet/framework/install/) - [ConsoleApp_ITTools2](https://github.com/FerJos/ITToolsSupport/tree/484957eb5852a34dd70df079e38c860b73dcc148/ConsoleApp_ITTools2)
 >
-> [.NET Framework 3.5](https://learn.microsoft.com/es-mx/dotnet/framework/install/) - [ConsoleApp_ITTools (Windows 7)](https://github.com/FerJos/ITToolsSupport/tree/d8cc77a33b1757a200e3ec6186a5ada392469fe4/ConsoleApp_ITTools%20(Windows%207)).
+> [.NET Framework 3.5](https://learn.microsoft.com/es-mx/dotnet/framework/install/) - [ConsoleApp_ITTools2 (Windows 7)](https://github.com/FerJos/ITToolsSupport/tree/843a954e45ecc3d2fd988362823d086a593898bd/ConsoleApp_ITTools2%20(Windows%207)).
 
 ![Captura de pantalla de la aplicación ConsoleApp_ITTools.](https://github.com/FerJos/ITToolsSupport/assets/38123159/3d848dcf-bed3-4864-a2b9-11637e73409d)
 ![Captura de pantalla de la aplicación WinFormsApp_ITTools.](https://github.com/FerJos/ITToolsSupport/assets/38123159/3780d0a3-5320-4aff-9d13-1c4cf37e2c1a)
