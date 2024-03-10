@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading;
 
 namespace ConsoleApp_ITTools2
@@ -51,6 +52,7 @@ namespace ConsoleApp_ITTools2
 
             while (runConsoleApp)
             {
+                Console.WriteLine(".NET Framework 3.5\n");
                 Console.WriteLine(appName + " - Herramientas para el mantenimiento y/o reparación del equipo Windows.");
                 if (class1.isRunningAsAdmin())
                 {
@@ -79,9 +81,16 @@ namespace ConsoleApp_ITTools2
                 switch (userInput)
                 {
                     case "!":
-                        Console.WriteLine("Esta aplicación de consola ejecuta las herramientas integradas del sistema operativo ©Microsoft Windows para realizar mantenimiento y/o reparación al equipo.\n");
+                        Console.WriteLine("Esta aplicación de consola ejecuta las herramientas integradas del sistema operativo ©Microsoft Windows para realizar mantenimiento y/o reparación al equipo.\n" +
+                            "A continuación se muestra la documentación de algunos de los comandos utilizados.\n\n" +
+                            "* sfc - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/sfc\n" +
+                            "* chkdsk - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/chkdsk?tabs=event-viewer\n" +
+                            "* DISM - https://learn.microsoft.com/es-mx/windows-hardware/manufacture/desktop/what-is-dism?view=windows-11\n" +
+                            "* cleanmgr - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/cleanmgr\n" +
+                            "* ipconfig - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/ipconfig\n" +
+                            "* shutdown - https://learn.microsoft.com/es-mx/windows-server/administration/windows-commands/shutdown\n");
 
-                        Console.WriteLine("Presione cualquier tecla para continuar...");
+                        Console.WriteLine("\nPresione cualquier tecla para continuar...");
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -101,36 +110,24 @@ namespace ConsoleApp_ITTools2
                             class1.runProcessConsole("sfc.exe /VERIFYONLY", true, false);
                         }
 
-                        Console.WriteLine("Presione cualquier tecla para continuar...");
-                        Console.ReadKey();
                         Console.Clear();
                         break;
                     case "2":
                         userInput = getLetterVolume();
                         class1.runProcessConsole("chkdsk.exe " + userInput + ": /f", true, false);
 
-                        Console.WriteLine("Presione cualquier tecla para continuar...");
-                        Console.ReadKey();
                         Console.Clear();
                         break;
                     case "3":
                         userInput = getLetterVolume();
                         class1.runProcessConsole("chkdsk.exe " + userInput + ": /f /r /b", true, false);
 
-                        Console.WriteLine("Presione cualquier tecla para continuar...");
-                        Console.ReadKey();
                         Console.Clear();
                         break;
                     case "4":
                         userInput = getLetterVolume();
                         class1.runProcessConsole("chkdsk.exe " + userInput + ": /f /r /b /x", true, false);
 
-                        Console.WriteLine("Presione cualquier tecla para continuar...");
-                        Console.ReadKey();
-                        Console.Clear();
-                        break;
-                    case "5":
-                        // Opción eliminada
                         Console.Clear();
                         break;
                     case "6":
@@ -184,8 +181,6 @@ namespace ConsoleApp_ITTools2
                     case "14":
                         class1.runProcessConsole("WMIC.exe", true, false);
 
-                        Console.WriteLine("Presione cualquier tecla para continuar...");
-                        Console.ReadKey();
                         Console.Clear();
                         break;
                     case "15":
@@ -197,8 +192,6 @@ namespace ConsoleApp_ITTools2
                     case "16":
                         class1.runProcessConsole("diskpart.exe", true, false);
 
-                        Console.WriteLine("Presione cualquier tecla para continuar...");
-                        Console.ReadKey();
                         Console.Clear();
                         break;
                     case "17":
@@ -211,8 +204,6 @@ namespace ConsoleApp_ITTools2
                         Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
                         class1.runProcessConsole("hdwwiz.exe", true, true);
 
-                        Console.WriteLine("Presione cualquier tecla para continuar...");
-                        Console.ReadKey();
                         Console.Clear();
                         break;
                     case "19":
@@ -226,8 +217,6 @@ namespace ConsoleApp_ITTools2
                         Console.WriteLine("Se ha iniciado una nueva ventana. Continúe desde la nueva ventana...");
                         class1.runProcessConsole("mrt.exe", true, true);
 
-                        Console.WriteLine("Presione cualquier tecla para continuar...");
-                        Console.ReadKey();
                         Console.Clear();
                         break;
                     case "21":
@@ -236,14 +225,9 @@ namespace ConsoleApp_ITTools2
 
                         Console.Clear();
                         break;
-                    case "22":
-                        Console.Clear();
-                        break;
                     case "23":
                         class1.runProcessConsole("ipconfig /all", false, false);
 
-                        Console.WriteLine("Presione cualquier tecla para continuar...");
-                        Console.ReadKey();
                         Console.Clear();
                         break;
                     case "24":

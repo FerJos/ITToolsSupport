@@ -15,7 +15,6 @@ namespace ConsoleApp_ITTools2
                 "2)*    CHKDSK - Corregir errores del disco.",
                 "3)*    CHKDSK - Corregir errores del disco, encontrar sectores defectuosos y recupera la información legible.",
                 "4)*    CHKDSK - Desmontar la unidad, corregir errores del disco, encontrar sectores defectuosos y recupera la información legible.",
-                "5)     [No disponible]",
                 "6)     Cleanmgr - Libera espacio en el disco.",
                 "7)     Abrir Protección del sistema.",
                 "8)     Abrir Panel de control.",
@@ -32,7 +31,6 @@ namespace ConsoleApp_ITTools2
                 "19)    Carpetas compartidas.",
                 "20)*   Herramienta de eliminación de software malintencionado de ©Microsoft Windows.",
                 "21)**  Editor de directivas de grupo local.",
-                "22)    [No disponible]",
                 "23)    ipConfig /All",
                 "24)    Salir del programa y reiniciar el equipo (Se perderá cualquier trabajo no guardado)."
             };
@@ -83,8 +81,15 @@ namespace ConsoleApp_ITTools2
             {
                 proceso.Start();
                 proceso.WaitForExit();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n\n__________\nEl proceso a finalizado con el siguiente código: " + proceso.ExitCode);
+                if (proceso.ExitCode == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
+                Console.WriteLine("\n\n__________\nEl proceso a finalizado con el siguiente código: " + proceso.ExitCode + "\nExit time: " + proceso.ExitTime.ToString());
                 Console.ResetColor();
             }
             catch (Exception errExc)
@@ -94,11 +99,14 @@ namespace ConsoleApp_ITTools2
                 Console.ResetColor();
                 Console.Beep();
             }
+
+            Console.WriteLine("\nPresione cualquier tecla para continuar...");
+            Console.ReadKey();
         }
 
-
-        public string convertInputToLetterVolume(string userInputAux)
+        public string convertInputToLetterVolume(string userInput)
         {
+            string userInputAux = userInput ?? "c";
             if (userInputAux == " " || userInputAux.Length != 1)
             {
                 userInputAux = "C";

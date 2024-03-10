@@ -83,8 +83,15 @@ namespace ConsoleApp_ITTools2
             {
                 proceso.Start();
                 proceso.WaitForExit();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n\n__________\nEl proceso a finalizado con el siguiente código: " + proceso.ExitCode);
+                if (proceso.ExitCode == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
+                Console.WriteLine("\n\n__________\nEl proceso a finalizado con el siguiente código: " + proceso.ExitCode + "\nExit time: " + proceso.ExitTime.ToString());
                 Console.ResetColor();
             }
             catch (Exception errExc)
@@ -94,11 +101,14 @@ namespace ConsoleApp_ITTools2
                 Console.ResetColor();
                 Console.Beep();
             }
+
+            Console.WriteLine("\nPresione cualquier tecla para continuar...");
+            Console.ReadKey();
         }
 
-
-        public string convertInputToLetterVolume(string userInputAux)
+        public string convertInputToLetterVolume(string userInput)
         {
+            string userInputAux = userInput ?? "c";
             if (userInputAux == " " || userInputAux.Length != 1)
             {
                 userInputAux = "C";
