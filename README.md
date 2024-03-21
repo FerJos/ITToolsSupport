@@ -1,7 +1,7 @@
 # IT Tools Support
 
 Este repositorio incluye tres proyectos construidos en Visual Studio 2022. Se incluye la aplicación de Windows Forms y la aplicación de Consola, ambas aplicaciones cumplen con el mismo propósito. Estas aplicaciones permiten la ejecución de las herramientas integradas en el sistema operativo Microsoft Windows con el objetivo de facilitar el mantenimiento y/o reparación del sistema.
-> [.NET 8.0 SDK](https://dotnet.microsoft.com/es-es/download/dotnet/8.0) - [ConsoleApp_ITTools](https://github.com/FerJos/ITToolsSupport/tree/d8cc77a33b1757a200e3ec6186a5ada392469fe4/ConsoleApp_ITTools), [WinFormsApp_ITTools](https://github.com/FerJos/ITToolsSupport/tree/d8cc77a33b1757a200e3ec6186a5ada392469fe4/WinFormsApp_ITTools).
+> [.NET 8.0 SDK](https://dotnet.microsoft.com/es-es/download/dotnet/8.0) - [ConsoleApp_ITTools](https://github.com/FerJos/ITToolsSupport/tree/d8cc77a33b1757a200e3ec6186a5ada392469fe4/ConsoleApp_ITTools), [WinFormsApp_ITTools](https://github.com/FerJos/ITToolsSupport/tree/d8cc77a33b1757a200e3ec6186a5ada392469fe4/WinFormsApp_ITTools), [WinFormsApp_ITTools_TaskKill](https://github.com/FerJos/ITToolsSupport/tree/e0af66107a9283bbe196841aa9b40313a733f007/WinFormsApp_ITTools_TaskKill).
 >
 > [.NET Framework 4.8.1](https://learn.microsoft.com/es-mx/dotnet/framework/install/) - [ConsoleApp_ITTools2](https://github.com/FerJos/ITToolsSupport/tree/484957eb5852a34dd70df079e38c860b73dcc148/ConsoleApp_ITTools2)
 >
