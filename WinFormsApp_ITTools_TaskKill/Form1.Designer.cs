@@ -30,11 +30,13 @@
         {
             label1 = new Label();
             groupBox1 = new GroupBox();
+            checkBox1 = new CheckBox();
             textBox1 = new TextBox();
             radioButton2 = new RadioButton();
             radioButton1 = new RadioButton();
             button1 = new Button();
             button2 = new Button();
+            checkBox2 = new CheckBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -43,25 +45,37 @@
             label1.AutoSize = true;
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
-            label1.Size = new Size(191, 45);
+            label1.Size = new Size(253, 30);
             label1.TabIndex = 0;
-            label1.Text = "Terminar forzosamente una tarea y\r\nprocesos secundarios iniciados por\r\nla tarea especificada.";
+            label1.Text = "Terminar forzosamente una tarea y procesos\r\nsecundarios iniciados por la tarea especificada.";
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(checkBox2);
+            groupBox1.Controls.Add(checkBox1);
             groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(radioButton2);
             groupBox1.Controls.Add(radioButton1);
             groupBox1.Location = new Point(12, 57);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(200, 103);
+            groupBox1.Size = new Size(260, 103);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Tarea";
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(6, 78);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(127, 19);
+            checkBox1.TabIndex = 3;
+            checkBox1.Text = "Cerrar al completar";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
             // textBox1
             // 
-            textBox1.Location = new Point(94, 74);
+            textBox1.Location = new Point(154, 74);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(100, 23);
             textBox1.TabIndex = 2;
@@ -104,7 +118,7 @@
             // button2
             // 
             button2.Enabled = false;
-            button2.Location = new Point(147, 176);
+            button2.Location = new Point(191, 176);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 3;
@@ -112,16 +126,27 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(140, 22);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(114, 19);
+            checkBox2.TabIndex = 4;
+            checkBox2.Text = "Standard Output";
+            checkBox2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(234, 211);
+            ClientSize = new Size(284, 211);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(groupBox1);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Form1";
             Text = "IT Tools TaskKill";
             groupBox1.ResumeLayout(false);
@@ -139,5 +164,7 @@
         private RadioButton radioButton1;
         private Button button1;
         private Button button2;
+        private CheckBox checkBox1;
+        private CheckBox checkBox2;
     }
 }

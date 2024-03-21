@@ -53,6 +53,8 @@ namespace WinFormsApp_ITTools_TaskKill
             {
                 radioButton1.Enabled = false;
                 radioButton2.Enabled = false;
+                checkBox1.Enabled = false;
+                checkBox2.Enabled = false;
                 textBox1.Enabled = false;
                 button1.Enabled = false;
                 button2.Enabled = false;
@@ -105,23 +107,37 @@ namespace WinFormsApp_ITTools_TaskKill
                     Process proceso = newProcess("taskkill.exe /F /T /IM " + textBox1.Text);
                     proceso.StartInfo.UseShellExecute = false;
                     proceso.StartInfo.CreateNoWindow = true;
+                    if (checkBox2.Checked)
+                    {
+                        proceso.StartInfo.RedirectStandardOutput = true;
+                    }
 
                     try
                     {
                         proceso.Start();
                         proceso.WaitForExit();
 
+                        if (proceso.StartInfo.RedirectStandardOutput)
+                        {
+                            MessageBox.Show(proceso.StandardOutput.ReadToEnd(), "Proceso - Output", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        }
+
                         switch (proceso.ExitCode)
                         {
                             case 0:
                                 MessageBox.Show("Se finalizó la tarea y sus procesos secundarios correctamente. (Código: 0)", "Proceso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                if (checkBox1.Checked)
+                                {
+                                    Close();
+                                    return;
+                                }
                                 break;
                             case 128:
                                 MessageBox.Show("No se encontró la tarea '" + textBox1.Text + "'. Haga click en 'Ver lista' para obtener el IM. (Código: 128)", "Proceso", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                             default:
                                 MessageBox.Show("Posibles problemas al intentar finalizar la tarea. (Código: " + proceso.ExitCode.ToString() + ")", "Proceso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                MessageBox.Show(proceso.StandardOutput.ToString(), "Proceso - Standard Output", MessageBoxButtons.OK, MessageBoxIcon.None);
                                 break;
                         }
                     }
@@ -133,9 +149,11 @@ namespace WinFormsApp_ITTools_TaskKill
 
                 radioButton1.Enabled = true;
                 radioButton2.Enabled = true;
+                checkBox1.Enabled = true;
+                checkBox2.Enabled = true;
                 textBox1.Enabled = true;
-                textBox1.Text = "";
                 button1.Enabled = true;
+                button2.Enabled = true;
             }
         }
 
